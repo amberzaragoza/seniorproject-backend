@@ -27,7 +27,7 @@ public class Business {
 	private String name;
 	
 	@Column(name="street")
-	private String address;
+	private String street;
 	
 	@Column(name="state")
 	private String state;
@@ -38,8 +38,11 @@ public class Business {
 	@Column(name="zip")
 	private String zip;
 	
-	@Column(name="phoneNum")
-	private String phoneNum;
+	@Column(name="primaryPhone")
+	private String primaryPhone;
+	
+	@Column(name="altPhone")
+	private String altPhone;
 	
 	@Column(name="email")
 	private String email;
@@ -74,20 +77,28 @@ public class Business {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
-	public String getPhoneNum() {
-		return phoneNum;
+	public String getPrimaryPhone() {
+		return primaryPhone;
 	}
 
-	public void setPhoneNum(String phoneNum) {
-		this.phoneNum = phoneNum;
+	public void setPrimaryPhone(String primaryPhone) {
+		this.primaryPhone = primaryPhone;
+	}
+	
+	public void setAltPhone(String altPhone) {
+		this.altPhone = altPhone;
+	}
+	
+	public String getAltPhone() {
+		return altPhone;
 	}
 
 	public String getEmail() {
