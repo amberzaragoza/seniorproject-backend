@@ -51,7 +51,7 @@ public class Business {
 	private String about;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="owner_id")
+	@JoinColumn(name="owner")
 	private AppUser owner;
 	
 	@OneToMany(cascade=CascadeType.MERGE)

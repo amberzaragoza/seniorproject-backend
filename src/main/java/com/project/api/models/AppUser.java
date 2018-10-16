@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="app_user")
@@ -37,7 +39,8 @@ public class AppUser {
 	@Column(name="reset_token")
 	private String resetToken;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  @OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  @JsonIgnore
 	@JoinColumn(name="owned_business_id")
 	private Business business;
 	
