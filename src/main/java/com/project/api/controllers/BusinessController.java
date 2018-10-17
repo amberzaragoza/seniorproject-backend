@@ -10,33 +10,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.api.models.AppUser;
 import com.project.api.models.Business;
 import com.project.api.services.BusinessService;
+import com.project.api.repositories.UserRepository;
 
 @RestController
 @RequestMapping("/business")
 public class BusinessController {
   
   @Autowired
-	private BusinessService businessService;
-	
+  private BusinessService businessService;
+  
 	public BusinessController(BusinessService businessService) {
 		this.businessService = businessService;
 	}
 	
 	// Post Requests
-	@PostMapping("/post")
-	public void saveBusiness(@RequestBody Business business) {
-		businessService.save(business);
-		
+	@PostMapping("/post/{userId}")
+	public void saveBusiness(@RequestBody Business business, @PathVariable String userId) {
+    businessService.save(business, userId);
 	}
 	
 	//Get Requests
-	@GetMapping("/get/{id}")
+	@GetMapping("/get/id/{id}")
 	public Optional<Business> getBusinessById(@PathVariable String id) {
 		return businessService.getBusinessById(id);
-		
-	}
+  }
+  
+  @GetMapping("/get/owner/{ownerId}")
+  public Business getBusinessByOwnerId(@PathVariable String ownerId){
+    return businessService.getBusinessByOwnerId(ownerId);
+  }
 	
 	
 

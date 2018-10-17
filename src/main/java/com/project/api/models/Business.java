@@ -15,6 +15,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -55,15 +56,39 @@ public class Business {
 	
 	@Column(name="about")
 	private String about;
-	
+  
   @OneToOne
+  @JoinColumn(name="owner_id")
+  @JsonBackReference
 	private AppUser owner;
 	
-	// @OneToMany(cascade=CascadeType.MERGE)
-	// private Set<AppUser> employees;
+	@OneToMany(cascade=CascadeType.MERGE)
+	private Set<AppUser> employees;
 	
-	// @OneToMany(cascade=CascadeType.MERGE)
-	// private Set<Rating> ratings;
+	@OneToMany(cascade=CascadeType.MERGE)
+  private Set<Rating> ratings;
+
+  public Business(){}
+  
+  public Business(String id, String name, String street, String state, String city,
+                  String zip, String primaryPhone, String altPhone, String email,
+                  String about){
+    
+    this.id = id;
+    this.name = name;
+    this.street = street;
+    this.state = state;
+    this.city = city;
+    this.zip = zip;
+    this.primaryPhone = primaryPhone;
+    this.altPhone = altPhone;
+    this.email = email;
+    this.about = about;
+    this.owner = new AppUser();
+    
+
+
+  }
 	
 
 	public String getId() {
@@ -154,20 +179,20 @@ public class Business {
 		this.zip = zip;
 	}
 
-	// public Set<AppUser> getEmployees() {
-	// 	return employees;
-	// }
+	public Set<AppUser> getEmployees() {
+		return employees;
+	}
 
-	// public void setEmployees(Set<AppUser> employees) {
-	// 	this.employees = employees;
-	// }
+	public void setEmployees(Set<AppUser> employees) {
+		this.employees = employees;
+	}
 
-	// public Set<Rating> getRatings() {
-	// 	return ratings;
-	// }
+	public Set<Rating> getRatings() {
+		return ratings;
+	}
 
-	// public void setRatings(Set<Rating> ratings) {
-	// 	this.ratings = ratings;
-	// }
+	public void setRatings(Set<Rating> ratings) {
+		this.ratings = ratings;
+	}
 	
 }

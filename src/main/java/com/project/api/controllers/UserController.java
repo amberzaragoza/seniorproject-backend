@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.project.api.models.AppUser;
 import com.project.api.repositories.UserRepository;
 
@@ -33,7 +34,7 @@ public class UserController {
 		userRepository.save(user);
   }
   
-  @GetMapping("/get/uuid/{id}")
+  @GetMapping("/get/String/{id}")
   public AppUser getAppUserById(@PathVariable String id){
     return userRepository.findById(id).get();
   }

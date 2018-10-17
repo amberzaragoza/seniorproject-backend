@@ -42,11 +42,27 @@ public class AppUser {
   @Column(name = "reset_token")
   private String resetToken;
 
-  @OneToOne(mappedBy="owner")
+  @OneToOne(mappedBy="owner", cascade = CascadeType.ALL)
+  @JsonManagedReference
   private Business business;
 
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
+
+  public AppUser(){}
+
+  public AppUser(String id, String username, String lastName,
+                 String firstName, String password, String resetToken){
+    this.id = id;
+    this.username = username;
+    this.lastName = lastName;
+    this.firstName = firstName;
+    this.password = password;
+    this.resetToken = resetToken;
+    this.business = new Business();
+    this.employedBy = new Business();
+
+  }
 
   public String getId() {
     return id;
