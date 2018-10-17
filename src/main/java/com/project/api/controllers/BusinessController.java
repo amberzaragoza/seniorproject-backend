@@ -33,9 +33,8 @@ public class BusinessController {
 	
 	//Get Requests
 	@GetMapping("/get/{id}")
-	public Business getBusinessById(@PathVariable long id) {
-		Business business = businessService.getBusinessById(id).get();
-		return business;
+	public Optional<Business> getBusinessById(@PathVariable String id) {
+		return businessService.getBusinessById(id);
 		
 	}
 	

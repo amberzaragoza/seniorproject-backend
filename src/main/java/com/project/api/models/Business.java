@@ -7,21 +7,27 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="business")
 public class Business {
 	
-	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  @Column(name = "id")
+  private String id;
 	
 	@Column(name="name")
 	private String name;
@@ -50,22 +56,21 @@ public class Business {
 	@Column(name="about")
 	private String about;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="owner")
+  @OneToOne
 	private AppUser owner;
 	
-	@OneToMany(cascade=CascadeType.MERGE)
-	private Set<AppUser> employees;
+	// @OneToMany(cascade=CascadeType.MERGE)
+	// private Set<AppUser> employees;
 	
-	@OneToMany(cascade=CascadeType.MERGE)
-	private Set<Rating> ratings;
+	// @OneToMany(cascade=CascadeType.MERGE)
+	// private Set<Rating> ratings;
 	
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -149,20 +154,20 @@ public class Business {
 		this.zip = zip;
 	}
 
-	public Set<AppUser> getEmployees() {
-		return employees;
-	}
+	// public Set<AppUser> getEmployees() {
+	// 	return employees;
+	// }
 
-	public void setEmployees(Set<AppUser> employees) {
-		this.employees = employees;
-	}
+	// public void setEmployees(Set<AppUser> employees) {
+	// 	this.employees = employees;
+	// }
 
-	public Set<Rating> getRatings() {
-		return ratings;
-	}
+	// public Set<Rating> getRatings() {
+	// 	return ratings;
+	// }
 
-	public void setRatings(Set<Rating> ratings) {
-		this.ratings = ratings;
-	}
+	// public void setRatings(Set<Rating> ratings) {
+	// 	this.ratings = ratings;
+	// }
 	
 }

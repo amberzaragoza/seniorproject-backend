@@ -22,8 +22,8 @@ public class BusinessService {
 		businessRepository.save(business);
 	}
 	
-	public Optional<Business> getBusinessById(Long id) {
-		return businessRepository.findById(id);
+	public Optional<Business> getBusinessById(String id) {
+    return businessRepository.findById(id);
 	}
 
 }
