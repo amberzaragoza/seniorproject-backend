@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="business")
 public class Business {
@@ -50,8 +52,9 @@ public class Business {
 	@Column(name="about")
 	private String about;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="owner_id")
+	@JsonBackReference
 	private AppUser owner;
 	
 	@OneToMany(cascade=CascadeType.MERGE)
