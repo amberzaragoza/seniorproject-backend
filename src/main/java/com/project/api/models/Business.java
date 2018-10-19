@@ -15,10 +15,13 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.hibernate.annotations.GenericGenerator;
+=======
+>>>>>>> 8c6105a04ef0103e5e609304bb2e5ba81f4998cc
 
 @Entity
 @Table(name="business")
@@ -59,7 +62,7 @@ public class Business {
   
   @OneToOne
   @JoinColumn(name="owner_id")
-  @JsonBackReference
+  @JsonBackReferences
 	private AppUser owner;
 	
 	@OneToMany(cascade=CascadeType.MERGE)
