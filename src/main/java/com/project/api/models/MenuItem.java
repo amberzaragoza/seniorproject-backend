@@ -12,71 +12,85 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "MenuItem")
 public class MenuItem {
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id")
-    private String id;
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  @Column(name = "id")
+  private String id;
 
-    @Column(name = "title")
-    private String title;
+  @Column(name = "title")
+  private String title;
 
-    @Column(name = "description")
-    private String description;
+  @Column(name = "description")
+  private String description;
 
-    @Column(name = "price")
-    private Double price;
+  @Column(name = "low_price")
+  private Double lowPrice;
 
-    @Column(name = "imageUrl")
-    private String imageUrl;
+  @Column(name = "high_price")
+  private Double highPrice;
 
-    public MenuItem() {}
+  @Column(name = "imageUrl")
+  private String imageUrl;
 
-    public MenuItem(String title, String description, Double price, String imageUrl) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.imageUrl = imageUrl;
-    }
+  public MenuItem() {
+  }
 
-    public String getId() {
-        return id;
-    }
+  public MenuItem(String title, String description, Double lowPrice,
+                  Double highPrice, String imageUrl) {
+    this.title = title;
+    this.description = description;
+    this.lowPrice = lowPrice;
+    this.highPrice = highPrice;
+    this.imageUrl = imageUrl;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public Double getPrice() {
-        return price;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
+  public Double getLowPrice() {
+    return lowPrice;
+  }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+  public void setLowPrice(Double lowPrice) {
+    this.lowPrice = lowPrice;
+  }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+  public Double getHighPrice() {
+    return highPrice;
+  }
+
+  public void setHighPrice(Double highPrice) {
+    this.highPrice = highPrice;
+  }
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
 
 }

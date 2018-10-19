@@ -20,37 +20,35 @@ import com.project.api.services.MenuService;
 @RequestMapping("/menu")
 public class MenuController {
 
-	@Autowired
-	private MenuService menuService;
+  @Autowired
+  private MenuService menuService;
+  @Autowired
+  private BusinessService businessService;
 
-	@Autowired
-	private BusinessService businessService;
+  public MenuController(MenuService menuService, BusinessService businessService) {
+    this.menuService = menuService;
+    this.businessService = businessService;
+  }
 
+  // Post Requests========================================================================
+  @PostMapping("/post/{businessId}")
+  public void saveMenu(@RequestBody Menu menu, @PathVariable String businessId) {
+    Business business = businessService.getBusinessById(businessId).get();
+    business.addMenu(menu);
+    menuService.save(menu);
+  }
 
+  @PostMapping("/post/item/{menuId}")
+  public void addItemToMenu(@PathVariable String menuId, @RequestBody MenuItem item) {
+    Menu menu = menuService.findById(menuId).get();
+    menu.addItem(item);
+    menuService.save(menu);
+  }
 
-	public MenuController(MenuService menuService, BusinessService businessService) {
-		this.menuService = menuService;
-		this.businessService = businessService;
-	}
-
-	// Post Requests
-	@PostMapping("/post/{businessId}")
-	public void saveMenu(@RequestBody Menu menu, @PathVariable String businessId) {
-		Business business = businessService.getBusinessById(businessId).get();
-		menuService.save(menu);
-	}
-
-	 @PostMapping("/post/item/{menuId}")
-	 public void addItemToMenu(@PathVariable String menuId, @RequestBody MenuItem item){
-		Menu menu = menuService.findById(menuId).get();
-		menu.addItem(item);
-		menuService.save(menu);
-	 }
-
-	// Get Requests
-	@GetMapping("/get/id/{id}")
-	public Optional<Menu> getBusinessById(@PathVariable String id) {
-		return menuService.findById(id);
-	}
+  // Get Requests==========================================================================
+  @GetMapping("/get/id/{id}")
+  public Optional<Menu> getBusinessById(@PathVariable String id) {
+    return menuService.findById(id);
+  }
 
 }
