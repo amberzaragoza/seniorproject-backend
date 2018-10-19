@@ -15,7 +15,7 @@ public class MenuItem {
   @Id
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
+	@Column(name = "id", length = 36)
   private String id;
 
   @Column(name = "title")

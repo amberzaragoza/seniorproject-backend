@@ -30,7 +30,7 @@ public class MenuController {
     this.businessService = businessService;
   }
 
-  // Post Requests========================================================================
+  // Post Requests ========================================================================
   @PostMapping("/post/{businessId}")
   public void saveMenu(@RequestBody Menu menu, @PathVariable String businessId) {
     Business business = businessService.getBusinessById(businessId).get();
@@ -45,7 +45,7 @@ public class MenuController {
     menuService.save(menu);
   }
 
-  // Get Requests==========================================================================
+  // Get Requests ==========================================================================
   @GetMapping("/get/id/{id}")
   public Optional<Menu> getBusinessById(@PathVariable String id) {
     return menuService.findById(id);
