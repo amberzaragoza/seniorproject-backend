@@ -1,0 +1,92 @@
+package com.project.api.models;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "Menu")
+public class Menu {
+
+	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@Column(name = "id")
+	private String id;
+
+	@Column(name = "title")
+	private String title;
+
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "imageUrl")
+	private String imageUrl;
+
+	@OneToMany(cascade = CascadeType.MERGE)
+	private Set<MenuItem> items;
+
+	public Menu() {
+	}
+
+	public Menu(String title, String description, String imageUrl) {
+		this.title = title;
+		this.description = description;
+		this.imageUrl = imageUrl;
+		this.items = new HashSet<>();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public Set<MenuItem> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<MenuItem> items) {
+		this.items = items;
+	}
+
+	public void addItem(MenuItem item){
+		this.items.add(item);
+	}
+
+}

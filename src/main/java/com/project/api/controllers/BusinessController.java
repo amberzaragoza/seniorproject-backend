@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.api.models.AppUser;
 import com.project.api.models.Business;
 import com.project.api.services.BusinessService;
-import com.project.api.repositories.UserRepository;
 
 @RestController
 @RequestMapping("/business")
