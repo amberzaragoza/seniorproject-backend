@@ -69,11 +69,12 @@ public class Business {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Menu> menus;
 
-	public Business() {
-	}
+	public Business() {}
 
-	public Business(String id, String name, String street, String state, String city, String zip, String primaryPhone,
-			String altPhone, String email, String about) {
+	public Business(String id,           String name,     String street, 
+									String state, 		   String city,     String zip, 
+									String primaryPhone, String altPhone, String email, 
+									String about) {
 
 		this.id = id;
 		this.name = name;
