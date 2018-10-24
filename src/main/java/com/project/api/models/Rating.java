@@ -22,11 +22,20 @@ public class Rating {
   @Column(name = "star_rating")
   private float starRating;
 
-  @Column(name = "compliment")
-  private String compliment;
+  @Column(name = "comment")
+  private String comment;
+
+  @Column(name = "isApproved")
+  private boolean isApproved;
 
   @ManyToOne
   private AppUser user;
+
+  public Rating(float starRating, String comment){
+    this.starRating = starRating;
+    this.comment = comment;
+    this.isApproved = false;
+  }
 
   public String getId() {
     return id;
@@ -44,12 +53,12 @@ public class Rating {
     this.starRating = starRating;
   }
 
-  public String getCompliment() {
-    return compliment;
+  public String getComment() {
+    return comment;
   }
 
-  public void setCompliment(String compliment) {
-    this.compliment = compliment;
+  public void setComment(String comment) {
+    this.comment = comment;
   }
 
   public AppUser getUser() {
@@ -58,6 +67,14 @@ public class Rating {
 
   public void setUser(AppUser user) {
     this.user = user;
+  }
+
+  public boolean isIsApproved() {
+    return isApproved;
+  }
+
+  public void setIsApproved(boolean isApproved) {
+    this.isApproved = isApproved;
   }
 
 }

@@ -1,5 +1,6 @@
 package com.project.api.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.api.models.Business;
+import com.project.api.models.Rating;
 import com.project.api.services.BusinessService;
 
 @RestController
@@ -30,6 +32,11 @@ public class BusinessController {
 	@PostMapping("/post/{userId}")
 	public void saveBusiness(@RequestBody Business business, @PathVariable String userId) {
     businessService.save(business, userId);
+  }
+
+  @PostMapping("/post/rating/{businessId}")
+  public void postRating(@PathVariable String businessId, @RequestBody Rating rating){
+    businessService.addRating(businessId, rating);
   }
   
   // PUT Requests ===========================================================================
@@ -49,6 +56,12 @@ public class BusinessController {
     return businessService.getBusinessByOwnerId(ownerId);
   }
 
+  @GetMapping("/get/ratings/{businessId}")
+  public List<Rating> getRatings(@PathVariable String businessId){
+    return businessService.getRatings(businessId);
+  }
+
+  // DELETE Requests ========================================================================
   @DeleteMapping("/delete/{id}")
   public void deleteBusiness(@PathVariable String id){
     businessService.delete(id);

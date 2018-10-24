@@ -84,7 +84,8 @@ public class Business {
 		this.altPhone = altPhone;
 		this.email = email;
 		this.about = about;
-		this.menus = new HashSet<>();
+    this.menus = new HashSet<>();
+    this.ratings = new HashSet<>();
 
 	}
 
@@ -202,6 +203,10 @@ public class Business {
 
 	public void addMenu(Menu menu){
 		this.menus.add(menu);
-	}
+  }
+  
+  public void addRating(Rating rating){
+    this.ratings.add(rating);
+  }
 
 }

@@ -34,7 +34,7 @@ public class UserController {
 		userRepository.save(user);
   }
   
-  @GetMapping("/get/String/{id}")
+  @GetMapping("/get/id/{id}")
   public AppUser getAppUserById(@PathVariable String id){
     return userRepository.findById(id).get();
   }
