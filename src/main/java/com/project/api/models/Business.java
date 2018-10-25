@@ -71,8 +71,10 @@ public class Business {
 
 	public Business() {}
 
-	public Business(String id, String name, String street, String state, String city, String zip, String primaryPhone,
-			String altPhone, String email, String about) {
+  public Business(String id, String name, String street, 
+                  String state, String city, String zip, 
+                  String primaryPhone, String altPhone, String email, 
+                  String about) {
 
 		this.id = id;
 		this.name = name;
@@ -83,7 +85,8 @@ public class Business {
 		this.primaryPhone = primaryPhone;
 		this.altPhone = altPhone;
 		this.email = email;
-		this.about = about;
+    this.about = about;
+    this.employees = new HashSet<>();
     this.menus = new HashSet<>();
     this.ratings = new HashSet<>();
 
