@@ -71,10 +71,17 @@ public class Business {
 
 	public Business() {}
 
+<<<<<<< HEAD
 	public Business(String id,           String name,     String street, 
 									String state, 		   String city,     String zip, 
 									String primaryPhone, String altPhone, String email, 
 									String about) {
+=======
+  public Business(String id, String name, String street, 
+                  String state, String city, String zip, 
+                  String primaryPhone, String altPhone, String email, 
+                  String about) {
+>>>>>>> 069467510f83b458f328d56f4fce009a93594ef3
 
 		this.id = id;
 		this.name = name;
@@ -85,8 +92,10 @@ public class Business {
 		this.primaryPhone = primaryPhone;
 		this.altPhone = altPhone;
 		this.email = email;
-		this.about = about;
-		this.menus = new HashSet<>();
+    this.about = about;
+    this.employees = new HashSet<>();
+    this.menus = new HashSet<>();
+    this.ratings = new HashSet<>();
 
 	}
 
@@ -202,8 +211,12 @@ public class Business {
 		this.menus = menus;
 	}
 
-	public void addMenuItem(Menu menu){
+	public void addMenu(Menu menu){
 		this.menus.add(menu);
-	}
+  }
+  
+  public void addRating(Rating rating){
+    this.ratings.add(rating);
+  }
 
 }
