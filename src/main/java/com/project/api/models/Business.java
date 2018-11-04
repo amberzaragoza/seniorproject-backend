@@ -28,19 +28,19 @@ public class Business {
 	@Column(name = "id", length = 36)
 	private String id;
 
-	@Column(name = "name")
+	@Column(name = "name", length=30)
 	private String name;
 
-	@Column(name = "street")
+	@Column(name = "street", length=50)
 	private String street;
 
-	@Column(name = "state")
+	@Column(name = "state", length=2)
 	private String state;
 
-	@Column(name = "city")
+	@Column(name = "city", length=50)
 	private String city;
 
-	@Column(name = "zip")
+	@Column(name = "zip", length=8)
 	private String zip;
 
 	@Column(name = "primaryPhone", length = 10)
@@ -49,10 +49,10 @@ public class Business {
 	@Column(name = "altPhone", length = 10)
 	private String altPhone;
 
-	@Column(name = "email")
+	@Column(name = "email", length=30)
 	private String email;
 
-	@Column(name = "about")
+	@Column(name = "about", length=255)
 	private String about;
 
 	@OneToOne
