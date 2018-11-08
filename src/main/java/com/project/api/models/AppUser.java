@@ -20,7 +20,7 @@ public class AppUser {
   @Id
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
-	@Column(name = "id", length = 36)
+  @Column(name = "id", length = 36)
   private String id;
 
   @Column(name = "username")
@@ -38,23 +38,29 @@ public class AppUser {
   @Column(name = "reset_token")
   private String resetToken;
 
-  @OneToOne(mappedBy="owner", cascade = CascadeType.ALL)
+  @Column(name = "avatarLink")
+  private String avatarLink;
+
+  @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
   @JsonManagedReference
   private Business business;
 
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
 
-  public AppUser(){}
+  public AppUser() {
+  }
 
-  public AppUser(String id, String username, String lastName,
-                 String firstName, String password, String resetToken){
+  public AppUser(String id, String username, String lastName, 
+                 String firstName, String password, String resetToken, 
+                 String avatarLink) {
     this.id = id;
     this.username = username;
     this.lastName = lastName;
     this.firstName = firstName;
     this.password = password;
     this.resetToken = resetToken;
+    this.avatarLink = avatarLink;
     this.business = new Business();
     this.employedBy = new Business();
 
@@ -122,6 +128,14 @@ public class AppUser {
 
   public void setEmployedBy(Business employedBy) {
     this.employedBy = employedBy;
+  }
+
+  public String getAvatarLink() {
+    return avatarLink;
+  }
+
+  public void setAvatarLink(String avatarLink) {
+    this.avatarLink = avatarLink;
   }
 
 }

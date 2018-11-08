@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "api",
+                "projectName": "api",
+                "workingDirectory": "/media/me/Storage_1TB/devfolder/senior-project/seniorproject-backend",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "api",
+                "projectName": "api",
+                "workingDirectory": "/media/me/Storage_1TB/devfolder/senior-project/seniorproject-backend",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}

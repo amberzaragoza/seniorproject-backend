@@ -71,17 +71,10 @@ public class Business {
 
 	public Business() {}
 
-<<<<<<< HEAD
-	public Business(String id,           String name,     String street, 
-									String state, 		   String city,     String zip, 
-									String primaryPhone, String altPhone, String email, 
-									String about) {
-=======
   public Business(String id, String name, String street, 
                   String state, String city, String zip, 
                   String primaryPhone, String altPhone, String email, 
                   String about) {
->>>>>>> 069467510f83b458f328d56f4fce009a93594ef3
 
 		this.id = id;
 		this.name = name;

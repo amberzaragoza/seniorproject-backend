@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.api.models.AppUser;
 import com.project.api.models.Business;
+import com.project.api.models.Menu;
 import com.project.api.models.Rating;
 import com.project.api.repositories.BusinessRepository;
 import com.project.api.repositories.UserRepository;
@@ -21,8 +22,9 @@ public class BusinessService {
   @Autowired
   private UserRepository userRepository;
 
-  public BusinessService(BusinessRepository businessRepository, 
+  public BusinessService(BusinessRepository businessRepository,
                          UserRepository userRepository) {
+                           
     this.businessRepository = businessRepository;
     this.userRepository = userRepository;
   }
@@ -35,8 +37,8 @@ public class BusinessService {
     businessRepository.save(business);
   }
 
-  public void save(Business business, String userId) {
-    AppUser owner = userRepository.findById(userId).get();
+  public void save(Business business, String username) {
+    AppUser owner = userRepository.findByUsername(username);
     business.setOwner(owner);
     businessRepository.save(business);
   }
@@ -55,12 +57,26 @@ public class BusinessService {
     List<Rating> ratings = new ArrayList<>();
     business.getRatings().forEach(ratings::add);
     return ratings;
-
   }
 
-  public void addRating(String businessId, Rating rating){
+  public void addRating(String username, String businessId, Rating rating){
     Business business = businessRepository.findById(businessId).get();
+    AppUser user = userRepository.findByUsername(username);
+    rating.setUser(user);
     business.addRating(rating);
+    save(business);
+  }
+
+  public List<Menu> getAllMenus(String ownerId){
+    Business business = getBusinessByOwnerId(ownerId);
+    List<Menu> menus = new ArrayList<>();
+    business.getMenus().forEach(menus::add);
+    return menus;
+  }
+
+  public void addMenu(String ownerId, Menu menu){
+    Business business = getBusinessByOwnerId(ownerId);
+    business.addMenu(menu);
     save(business);
   }
 

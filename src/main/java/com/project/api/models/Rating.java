@@ -37,6 +37,10 @@ public class Rating {
     this.isApproved = false;
   }
 
+  public Rating(){
+    this.isApproved = false;
+  }
+
   public String getId() {
     return id;
   }

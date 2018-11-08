@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.api.models.Business;
+import com.project.api.models.Menu;
 import com.project.api.models.Rating;
 import com.project.api.services.BusinessService;
 
@@ -29,14 +30,21 @@ public class BusinessController {
 	}
 	
 	// POST Requests ==========================================================================
-	@PostMapping("/post/{userId}")
-	public void saveBusiness(@RequestBody Business business, @PathVariable String userId) {
-    businessService.save(business, userId);
+	@PostMapping("/post/{username}")
+	public void saveBusiness(@RequestBody Business business, @PathVariable String username) {
+    businessService.save(business, username);
   }
 
-  @PostMapping("/post/rating/{businessId}")
-  public void postRating(@PathVariable String businessId, @RequestBody Rating rating){
-    businessService.addRating(businessId, rating);
+  @PostMapping("/post/menu/{ownerId}")
+  public void postMenu(@PathVariable String ownerId, @RequestBody Menu menu){
+    businessService.addMenu(ownerId, menu);
+  }
+
+  @PostMapping("/post/rating/user/{username}/business/{businessId}")
+  public void postRating(@PathVariable String username, 
+                         @PathVariable String businessId, 
+                         @RequestBody Rating rating){      
+    businessService.addRating(username, businessId, rating);
   }
   
   // PUT Requests ===========================================================================
@@ -61,10 +69,15 @@ public class BusinessController {
     return businessService.getRatings(businessId);
   }
 
+  @GetMapping("/get/menus/{ownerId}")
+  public List<Menu> getMenus(@PathVariable String ownerId){
+    return businessService.getAllMenus(ownerId);
+  }
+
   // DELETE Requests ========================================================================
   @DeleteMapping("/delete/{id}")
   public void deleteBusiness(@PathVariable String id){
     businessService.delete(id);
   }
-	
+
 }
