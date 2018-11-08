@@ -23,16 +23,16 @@ public class AppUser {
   @Column(name = "id", length = 36)
   private String id;
 
-  @Column(name = "username")
+  @Column(name = "username", length=30)
   private String username;
 
-  @Column(name = "lastName")
+  @Column(name = "lastName", length=20)
   private String lastName;
 
-  @Column(name = "firstName")
+  @Column(name = "firstName", length=20)
   private String firstName;
 
-  @Column(name = "password")
+  @Column(name = "password", length=36)
   private String password;
 
   @Column(name = "reset_token")
