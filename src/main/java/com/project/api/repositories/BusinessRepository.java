@@ -8,5 +8,4 @@ import com.project.api.models.Business;
 
 @Repository
 public interface BusinessRepository extends JpaRepository<Business, String> {
-  
 }

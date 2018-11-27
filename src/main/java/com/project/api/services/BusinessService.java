@@ -50,7 +50,7 @@ public class BusinessService {
     business.setOwner(owner);
     businessRepository.save(business);
     HttpHeaders httpHeaders = new HttpHeaders();
-    return new ResponseEntity<>(business, httpHeaders, HttpStatus.OK);
+    return new ResponseEntity<>(owner.getBusiness(), httpHeaders, HttpStatus.OK);
   }
 
   public Optional<Business> getBusinessById(String id) {
@@ -92,9 +92,16 @@ public class BusinessService {
     menuRepository.save(menu);
     business.addMenu(menu);
     save(business);
-
     HttpHeaders httpHeaders = new HttpHeaders();
     return new ResponseEntity<>(menu, httpHeaders, HttpStatus.OK);
   }
+
+  public ResponseEntity<Business> update(Business business){
+    save(business);
+    HttpHeaders httpHeaders = new HttpHeaders();
+    return new ResponseEntity<>(business, httpHeaders, HttpStatus.OK);
+  }
+  
+
 
 }
