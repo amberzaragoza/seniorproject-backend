@@ -32,7 +32,7 @@ public class AppUser {
   @Column(name = "firstName", length=20)
   private String firstName;
 
-  @Column(name = "password", length=36)
+  @Column(name = "password", length=80)
   private String password;
 
   @Column(name = "reset_token")
