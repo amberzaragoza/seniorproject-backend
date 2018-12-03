@@ -52,7 +52,7 @@ public class BusinessController {
   }
   
   // PATCH Requests =========================================================================
-  @PatchMapping("/update")
+  @PutMapping("/update")
   public ResponseEntity<Business> updateBusiness(@RequestBody Business business){
     return businessService.update(business);
   }

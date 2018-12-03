@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,16 +43,16 @@ public class MenuController {
   }
 
   @PostMapping("/post/item/{menuId}")
-  public void addItemToMenu(@PathVariable String menuId, @RequestBody MenuItem item) {
+  public ResponseEntity<Menu> addItemToMenu(@PathVariable String menuId, @RequestBody MenuItem item) {
     Menu menu = menuService.findById(menuId).get();
     menu.addItem(item);
-    menuService.save(menu);
+    return menuService.save(menu);
   }
 
   // DELETE Requests =======================================================================
-  @DeleteMapping("/delete/menu/{id}")
-  public void deleteMenu(@PathVariable String id){
-    menuService.deleteMenu(id);
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<Menu> deleteMenu(@PathVariable String id){
+    return menuService.deleteMenu(id);
   }
 
   @DeleteMapping("/delete/menu/item/{id}")
@@ -61,8 +62,8 @@ public class MenuController {
   
   // PUT Requests ==========================================================================
   @PutMapping("/update")
-  public void updateMenu(@RequestBody Menu menu){
-    menuService.update(menu);
+  public ResponseEntity<Menu> updateMenu(@RequestBody Menu menu){
+    return menuService.update(menu);
   }
 
   @PutMapping("/update/item")

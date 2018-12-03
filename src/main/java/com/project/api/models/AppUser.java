@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
@@ -23,16 +24,16 @@ public class AppUser {
   @Column(name = "id", length = 36)
   private String id;
 
-  @Column(name = "username", length=30)
+  @Column(name = "username", length = 30)
   private String username;
 
-  @Column(name = "lastName", length=20)
+  @Column(name = "lastName", length = 20)
   private String lastName;
 
-  @Column(name = "firstName", length=20)
+  @Column(name = "firstName", length = 20)
   private String firstName;
 
-  @Column(name = "password", length=80)
+  @Column(name = "password", length = 80)
   private String password;
 
   @Column(name = "reset_token")
@@ -48,11 +49,10 @@ public class AppUser {
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
 
-  public AppUser() {
-  }
+  public AppUser() {}
 
   public AppUser(String id, String username, String lastName, 
-                 String firstName, String password, String resetToken, 
+                 String firstName, String password, String resetToken,
                  String avatarLink) {
     this.id = id;
     this.username = username;

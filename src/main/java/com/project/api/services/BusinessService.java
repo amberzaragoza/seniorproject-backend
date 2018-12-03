@@ -48,9 +48,10 @@ public class BusinessService {
   public ResponseEntity<Business> save(Business business, String username) {
     AppUser owner = userRepository.findByUsername(username);
     business.setOwner(owner);
-    businessRepository.save(business);
+    Business b = businessRepository.save(business);
+
     HttpHeaders httpHeaders = new HttpHeaders();
-    return new ResponseEntity<>(owner.getBusiness(), httpHeaders, HttpStatus.OK);
+    return new ResponseEntity<>(b, httpHeaders, HttpStatus.OK);
   }
 
   public Optional<Business> getBusinessById(String id) {

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.api.models.Menu;
@@ -26,24 +29,34 @@ public class MenuService {
     this.menuItemRepository = menuItemRepository;
   }
 
-  public void update(Menu menu) {
-    menuRepository.save(menu);
+  public ResponseEntity<Menu> update(Menu menu) {
+    Menu newMenu = menuRepository.save(menu);
+    HttpHeaders httpHeaders = new HttpHeaders();
+    return new ResponseEntity<>(newMenu, httpHeaders, HttpStatus.OK);
   }
 
   public void update(MenuItem item) {
     menuItemRepository.save(item);
   }
 
-  public void deleteMenu(String id) {
+  public ResponseEntity<Menu> deleteMenu(String id) {
+    Menu menu = menuRepository.findById(id).get();
     menuRepository.deleteById(id);
+    HttpHeaders httpHeaders = new HttpHeaders();
+    return new ResponseEntity<>(menu, httpHeaders, HttpStatus.OK);
   }
 
-  public void deleteMenuItem(String id) {
+  public ResponseEntity<Menu> deleteMenuItem(String id) {
     menuItemRepository.deleteById(id);
+    HttpHeaders httpHeaders = new HttpHeaders();
+    return new ResponseEntity<>(null, httpHeaders, HttpStatus.OK);
   }
 
-  public void save(Menu menu) {
-    menuRepository.save(menu);
+  public ResponseEntity<Menu> save(Menu menu) {
+    Menu updatedMenu = menuRepository.save(menu);
+    if(updatedMenu == null) return null;
+    HttpHeaders httpHeaders = new HttpHeaders();
+    return new ResponseEntity<>(updatedMenu, httpHeaders, HttpStatus.OK);
   }
 
   public Optional<Menu> findById(String id) {
