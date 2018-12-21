@@ -32,7 +32,7 @@ public class Menu {
 	@Column(name = "imageUrl")
 	private String imageUrl;
 
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<MenuItem> items;
 
 	public Menu() {

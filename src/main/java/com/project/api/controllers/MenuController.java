@@ -51,7 +51,7 @@ public class MenuController {
 
   // DELETE Requests =======================================================================
   @DeleteMapping("/delete/{id}")
-  public ResponseEntity<Menu> deleteMenu(@PathVariable String id){
+  public ResponseEntity<String> deleteMenu(@PathVariable String id){
     return menuService.deleteMenu(id);
   }
 
@@ -67,8 +67,8 @@ public class MenuController {
   }
 
   @PutMapping("/update/item")
-  public void updateMenuItem(@RequestBody MenuItem item){
-    menuService.update(item);
+  public ResponseEntity<MenuItem> updateMenuItem(@RequestBody MenuItem item){
+    return menuService.update(item);
   }
 
   // GET Requests ==========================================================================

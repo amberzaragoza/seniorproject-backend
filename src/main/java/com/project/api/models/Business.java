@@ -60,13 +60,13 @@ public class Business {
 	@JsonBackReference
 	private AppUser owner;
 
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<AppUser> employees;
 
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Rating> ratings;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Menu> menus;
 
 	public Business() {}

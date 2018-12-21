@@ -35,15 +35,16 @@ public class MenuService {
     return new ResponseEntity<>(newMenu, httpHeaders, HttpStatus.OK);
   }
 
-  public void update(MenuItem item) {
-    menuItemRepository.save(item);
+  public ResponseEntity<MenuItem> update(MenuItem item) {
+    MenuItem newItem = menuItemRepository.save(item);
+    HttpHeaders httpHeaders = new HttpHeaders();
+    return new ResponseEntity<>(newItem, httpHeaders, HttpStatus.OK);
   }
 
-  public ResponseEntity<Menu> deleteMenu(String id) {
-    Menu menu = menuRepository.findById(id).get();
+  public ResponseEntity<String> deleteMenu(String id) {
     menuRepository.deleteById(id);
     HttpHeaders httpHeaders = new HttpHeaders();
-    return new ResponseEntity<>(menu, httpHeaders, HttpStatus.OK);
+    return new ResponseEntity<>(id, httpHeaders, HttpStatus.OK);
   }
 
   public ResponseEntity<Menu> deleteMenuItem(String id) {

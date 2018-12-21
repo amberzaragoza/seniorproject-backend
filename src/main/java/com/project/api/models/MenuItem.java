@@ -24,11 +24,8 @@ public class MenuItem {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "low_price")
-  private Double lowPrice;
-
-  @Column(name = "high_price")
-  private Double highPrice;
+  @Column(name = "price")
+  private Double price;
 
   @Column(name = "imageUrl")
   private String imageUrl;
@@ -36,12 +33,10 @@ public class MenuItem {
   public MenuItem() {
   }
 
-  public MenuItem(String title, String description, Double lowPrice,
-                  Double highPrice, String imageUrl) {
+  public MenuItem(String title, String description, Double price, String imageUrl) {
     this.title = title;
     this.description = description;
-    this.lowPrice = lowPrice;
-    this.highPrice = highPrice;
+    this.price = price;
     this.imageUrl = imageUrl;
   }
 
@@ -69,20 +64,12 @@ public class MenuItem {
     this.description = description;
   }
 
-  public Double getLowPrice() {
-    return lowPrice;
+  public Double getPrice() {
+    return price;
   }
 
-  public void setLowPrice(Double lowPrice) {
-    this.lowPrice = lowPrice;
-  }
-
-  public Double getHighPrice() {
-    return highPrice;
-  }
-
-  public void setHighPrice(Double highPrice) {
-    this.highPrice = highPrice;
+  public void setPrice(Double price) {
+    this.price = price;
   }
 
   public String getImageUrl() {
