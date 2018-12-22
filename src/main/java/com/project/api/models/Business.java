@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "business")
@@ -66,7 +68,9 @@ public class Business {
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Rating> ratings;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@JoinColumn(name="business")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Set<Menu> menus;
 
 	public Business() {}

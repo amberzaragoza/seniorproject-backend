@@ -3,6 +3,8 @@ package com.project.api.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.PreRemove;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,6 +53,7 @@ public class MenuController {
 
   // DELETE Requests =======================================================================
   @DeleteMapping("/delete/{id}")
+  @PreRemove
   public ResponseEntity<String> deleteMenu(@PathVariable String id){
     return menuService.deleteMenu(id);
   }
