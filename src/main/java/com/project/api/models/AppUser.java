@@ -4,7 +4,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
@@ -51,10 +50,9 @@ public class AppUser {
 
   public AppUser() {}
 
-  public AppUser(String id, String username, String lastName, 
+  public AppUser(String username, String lastName, 
                  String firstName, String password, String resetToken,
                  String avatarLink) {
-    this.id = id;
     this.username = username;
     this.lastName = lastName;
     this.firstName = firstName;

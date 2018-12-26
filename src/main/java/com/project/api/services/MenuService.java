@@ -47,10 +47,10 @@ public class MenuService {
       return new ResponseEntity<>("Menu Deleted.", httpHeaders, HttpStatus.OK);
   }
 
-  public ResponseEntity<Menu> deleteMenuItem(String id) {
+  public ResponseEntity<String> deleteMenuItem(String id) {
     menuItemRepository.deleteById(id);
     HttpHeaders httpHeaders = new HttpHeaders();
-    return new ResponseEntity<>(null, httpHeaders, HttpStatus.OK);
+    return new ResponseEntity<>(id, httpHeaders, HttpStatus.OK);
   }
 
   public ResponseEntity<Menu> save(Menu menu) {

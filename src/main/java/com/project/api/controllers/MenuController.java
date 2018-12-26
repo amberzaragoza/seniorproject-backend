@@ -58,9 +58,10 @@ public class MenuController {
     return menuService.deleteMenu(id);
   }
 
-  @DeleteMapping("/delete/menu/item/{id}")
-  public void deleteMenuItem(@PathVariable String id){
-    menuService.deleteMenuItem(id);
+  @DeleteMapping("/delete/menuitem/{id}")
+  @PreRemove
+  public ResponseEntity<String> deleteMenuItem(@PathVariable String id){
+    return menuService.deleteMenuItem(id);
   }
   
   // PUT Requests ==========================================================================
