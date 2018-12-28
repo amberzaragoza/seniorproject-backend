@@ -48,11 +48,11 @@ public class AppUser {
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
 
-  public AppUser() {}
+  public AppUser() {
+  }
 
-  public AppUser(String username, String lastName, 
-                 String firstName, String password, String resetToken,
-                 String avatarLink) {
+  public AppUser(String username, String lastName, String firstName, String password, String resetToken,
+      String avatarLink) {
     this.username = username;
     this.lastName = lastName;
     this.firstName = firstName;
@@ -135,5 +135,6 @@ public class AppUser {
   public void setAvatarLink(String avatarLink) {
     this.avatarLink = avatarLink;
   }
+
 
 }
