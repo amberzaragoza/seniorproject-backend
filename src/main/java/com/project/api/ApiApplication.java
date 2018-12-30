@@ -2,7 +2,9 @@ package com.project.api;
 
 import com.project.api.models.AppUser;
 import com.project.api.models.Business;
+import com.project.api.models.GeoLocation;
 import com.project.api.repositories.BusinessRepository;
+import com.project.api.repositories.GeoLocationRepository;
 import com.project.api.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class ApiApplication implements CommandLineRunner {
 	private UserRepository userRepository;
 	@Autowired
 	private BusinessRepository businessRepository;
+	@Autowired
+	private GeoLocationRepository geoLocationRepository;
 
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -53,7 +57,19 @@ public class ApiApplication implements CommandLineRunner {
 		newUser.setFirstName(user[2]);
 		newUser.setLastName(user[3]);
 		newUser.setAvatarLink(user[4]);
-		newUser = userRepository.save(newUser);
+
+		
+
+		GeoLocation geoLocation = new GeoLocation();
+		geoLocation.setLatitude(0.0);
+		geoLocation.setLongitude(0.0);
+		geoLocation = geoLocationRepository.save(geoLocation);
+		
+		newUser.setGeolocation(geoLocation);
+		userRepository.save(newUser);
+
+
+		
 
 		if(businessInfo != null){
 			Business business = new Business();

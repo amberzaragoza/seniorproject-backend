@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -19,14 +18,14 @@ public class GeoLocation {
   @Column(name = "id", length = 36)
   private String id;
 
-  @Column(name = "lattitude", length = 120)
-  private double lattitude;
+  @Column(name = "latitude", length = 120)
+  private double latitude;
 
   @Column(name = "longitude", length = 120)
   private double longitude;
 
-  @OneToOne
-  private AppUser user;
+  @Column(name = "isShownOnMap")
+  private boolean isShownOnMap;
 
   public GeoLocation() {
   }
@@ -39,12 +38,12 @@ public class GeoLocation {
     this.id = id;
   }
 
-  public double getLattitude() {
-    return lattitude;
+  public double getLatitude() {
+    return latitude;
   }
 
-  public void setLattitude(double lattitude) {
-    this.lattitude = lattitude;
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
   }
 
   public double getLongitude() {
@@ -55,12 +54,12 @@ public class GeoLocation {
     this.longitude = longitude;
   }
 
-  public AppUser getUser() {
-    return user;
+  public boolean isIsShownOnMap() {
+    return isShownOnMap;
   }
 
-  public void setUser(AppUser user) {
-    this.user = user;
+  public void setIsShownOnMap(boolean isShownOnMap) {
+    this.isShownOnMap = isShownOnMap;
   }
 
 }

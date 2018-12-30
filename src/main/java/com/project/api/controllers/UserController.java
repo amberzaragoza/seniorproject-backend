@@ -1,6 +1,7 @@
 package com.project.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.api.models.AppUser;
+import com.project.api.models.GeoLocation;
 import com.project.api.repositories.UserRepository;
+import com.project.api.services.GeoLocationService;
 
 @RestController
 @RequestMapping("/users")
@@ -19,6 +22,8 @@ public class UserController {
   
   @Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private GeoLocationService geoLocationService;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public UserController(UserRepository userRepository,
@@ -30,7 +35,12 @@ public class UserController {
 	@PostMapping("/sign-up")
 	public void signup(@RequestBody AppUser user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		userRepository.save(user);
+
+		GeoLocation geoLocation = new GeoLocation();
+		geoLocation.setLatitude(0.0);
+		geoLocation.setLongitude(0.0);
+		geoLocation = geoLocationService.save(geoLocation).getBody();
+		user.setGeolocation(geoLocation);
   }
   
   @GetMapping("/get/id/{id}")

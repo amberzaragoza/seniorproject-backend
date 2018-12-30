@@ -48,11 +48,12 @@ public class AppUser {
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
 
-  public AppUser() {
-  }
+  @OneToOne
+  private GeoLocation geolocation;
 
-  public AppUser(String username, String lastName, String firstName, String password, String resetToken,
-      String avatarLink) {
+  public AppUser() {}
+
+  public AppUser(String username, String lastName, String firstName, String password, String resetToken, String avatarLink) {
     this.username = username;
     this.lastName = lastName;
     this.firstName = firstName;
@@ -61,6 +62,7 @@ public class AppUser {
     this.avatarLink = avatarLink;
     this.business = new Business();
     this.employedBy = new Business();
+    this.geolocation = new GeoLocation();
 
   }
 
@@ -136,5 +138,12 @@ public class AppUser {
     this.avatarLink = avatarLink;
   }
 
+  public GeoLocation getGeolocation() {
+    return geolocation;
+  }
+
+  public void setGeolocation(GeoLocation geolocation) {
+    this.geolocation = geolocation;
+  }
 
 }
