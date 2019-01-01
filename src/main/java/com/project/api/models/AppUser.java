@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vividsolutions.jts.geom.Point;
 
@@ -50,6 +51,7 @@ public class AppUser {
   private Business employedBy;
 
   @Column(name = "location", columnDefinition="geography(Point, 4326)")
+  @JsonIgnore
   private Point location;
 
   @Column(name = "isOnline")
