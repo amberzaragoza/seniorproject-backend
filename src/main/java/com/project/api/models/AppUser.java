@@ -50,14 +50,21 @@ public class AppUser {
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
 
-  @Column(name = "location", columnDefinition="geography(Point, 4326)")
+  @Column(name = "location", columnDefinition = "geography(Point, 4326)")
   @JsonIgnore
   private Point location;
+
+  @Column(name = "latitude")
+  private Double latitude;
+
+  @Column(name = "longitude")
+  private Double longitude;
 
   @Column(name = "isOnline")
   private boolean isOnline;
 
-  public AppUser() {}
+  public AppUser() {
+  }
 
   public AppUser(String username, String lastName, String firstName, String password, String resetToken,
       String avatarLink) {
@@ -158,6 +165,26 @@ public class AppUser {
 
   public void setIsOnline(boolean isOnline) {
     this.isOnline = isOnline;
+  }
+
+  public Double getLatitude() {
+    return latitude;
+  }
+
+  public void setLatitude(Double latitude) {
+    this.latitude = latitude;
+  }
+
+  public Double getLongitude() {
+    return longitude;
+  }
+
+  public void setLongitude(Double longitude) {
+    this.longitude = longitude;
+  }
+
+  public boolean isIsOnline() {
+    return isOnline;
   }
 
 }

@@ -1,14 +1,20 @@
 package com.project.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import com.project.api.models.AppUser;
 import com.project.api.repositories.UserRepository;
@@ -42,7 +48,27 @@ public class UserController {
   @GetMapping("/get/id/{id}")
   public AppUser getAppUserById(@PathVariable String id){
     return userRepository.findById(id).get();
-  }
+	}
+	
+	@PatchMapping("/update/user/{username}/lat/{latitude}/long/{longitude}/online/{isOnline}")
+	public ResponseEntity<AppUser> updateLocation(@PathVariable String username, @PathVariable double latitude, 
+																								@PathVariable double longitude, @PathVariable boolean isOnline){
+		AppUser user = userRepository.findByUsername(username);
+		Point point = new GeometryFactory().createPoint(new Coordinate(35, -119));
+		user.setLocation(point);
+		user.setLatitude(latitude);
+		user.setLongitude(longitude);
+		user.setIsOnline(isOnline);
+		user = userRepository.save(user);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		return new ResponseEntity<>(user, httpHeaders, HttpStatus.OK);
+
+	}
+
+	@GetMapping("/get/dist/lat/{latitude}/long/{longitude}")
+	public List<AppUser> findByDistance(@PathVariable Double latitude, @PathVariable Double longitude){
+		return userRepository.find(latitude, longitude);
+	}
 
 	@RequestMapping(method=RequestMethod.GET, value="/get/email/{email}")
 	public AppUser getAppUserByEmail(@PathVariable String email){

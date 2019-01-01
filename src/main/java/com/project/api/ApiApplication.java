@@ -4,6 +4,9 @@ import com.project.api.models.AppUser;
 import com.project.api.models.Business;
 import com.project.api.repositories.BusinessRepository;
 import com.project.api.repositories.UserRepository;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -53,6 +56,12 @@ public class ApiApplication implements CommandLineRunner {
 		newUser.setFirstName(user[2]);
 		newUser.setLastName(user[3]);
 		newUser.setAvatarLink(user[4]);
+
+		Point point = new GeometryFactory().createPoint(new Coordinate(0.0, 0.0));
+		newUser.setLocation(point);
+		newUser.setLatitude(0.0);
+		newUser.setLongitude(0.0);
+		newUser.setIsOnline(false);
 
 		
 

@@ -5,13 +5,13 @@
 
 -- INSERT INTO appuser values ('1', '', 'jon', true, 'jones', ST_GeomFromText('POINT(35.1235 -119.3568)', 4326), '123', '', 'jonjones@mail.com');
 -- INSERT INTO appuser values ('2', '', 'shit', true, 'storm', ST_GeomFromText('POINT(0 0)', 4326), '123', '', 'jonjones@mail.com');
-INSERT INTO appuser values ('2', '', 'shit', true, 'storm', ST_GeomFromText('POINT(0 0)', 4326), '123', '', 'jonjones@mail.com');
+-- INSERT INTO appuser values ('2', '', 'shit', true, 'storm', ST_GeomFromText('POINT(0 0)', 4326), '123', '', 'jonjones@mail.com');
 
 -- \! echo "By Radius:"
 -- get only geolocation (use for testing)
-SELECT * FROM appuser
-WHERE ST_DWithin(location::geography, ST_GeogFromText('SRID=4326;Point(35 -119)'), 25.06*1609.344) --miles*meters = convert miles to meters
-AND appuser.is_online=true;
+-- SELECT * FROM appuser
+-- WHERE ST_DWithin(location::geography, ST_GeogFromText('SRID=4326;Point(35 -119)'), 1.06*1609.344) --miles*meters = convert miles to meters
+-- AND appuser.is_online=true;
 
 -- build actual query here
 -- SELECT gl.id, u.id, u.username, b.name FROM geolocation gl
@@ -28,3 +28,13 @@ AND appuser.is_online=true;
 
 -- \! echo "All:"
 -- SELECT * FROM geolocation;
+
+-- select a from Events a where a.event&#95;date >= :currentDate and (((acos(sin(((:latitude)*pi()/180)) * 
+-- sin((a.latitude*pi()/180))+cos(((:latitude)*pi()/180)) * 
+-- cos((a.latitude*pi()/180)) * cos((((:longitude)- a.longitude)*pi()/180))))*180/pi())*60*1.1515) <=50
+
+
+SELECT a.username FROM appuser a WHERE (((acos(sin(((0)*pi()/180)) * 
+sin((a.latitude*pi()/180))+cos(((0)*pi()/180)) * cos((a.latitude*pi()/180)) * 
+cos((((0)- a.longitude)*pi()/180))))*180/pi())*60*1.1515) <=50
+AND a.is_online=true
