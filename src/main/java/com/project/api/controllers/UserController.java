@@ -1,7 +1,6 @@
 package com.project.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.api.models.AppUser;
-import com.project.api.models.GeoLocation;
 import com.project.api.repositories.UserRepository;
-import com.project.api.services.GeoLocationService;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
 
 @RestController
 @RequestMapping("/users")
@@ -23,7 +23,6 @@ public class UserController {
   @Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private GeoLocationService geoLocationService;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public UserController(UserRepository userRepository,
@@ -35,12 +34,9 @@ public class UserController {
 	@PostMapping("/sign-up")
 	public void signup(@RequestBody AppUser user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-		GeoLocation geoLocation = new GeoLocation();
-		geoLocation.setLatitude(0.0);
-		geoLocation.setLongitude(0.0);
-		geoLocation = geoLocationService.save(geoLocation).getBody();
-		user.setGeolocation(geoLocation);
+		Point point = new GeometryFactory().createPoint(new Coordinate(35, -119));
+		user.setLocation(point);
+		userRepository.save(user);
   }
   
   @GetMapping("/get/id/{id}")

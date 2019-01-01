@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.vividsolutions.jts.geom.Point;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -48,12 +49,16 @@ public class AppUser {
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
 
-  @OneToOne
-  private GeoLocation geolocation;
+  @Column(name = "location", columnDefinition="geography(Point, 4326)")
+  private Point location;
+
+  @Column(name = "isOnline")
+  private boolean isOnline;
 
   public AppUser() {}
 
-  public AppUser(String username, String lastName, String firstName, String password, String resetToken, String avatarLink) {
+  public AppUser(String username, String lastName, String firstName, String password, String resetToken,
+      String avatarLink) {
     this.username = username;
     this.lastName = lastName;
     this.firstName = firstName;
@@ -62,7 +67,6 @@ public class AppUser {
     this.avatarLink = avatarLink;
     this.business = new Business();
     this.employedBy = new Business();
-    this.geolocation = new GeoLocation();
 
   }
 
@@ -138,12 +142,20 @@ public class AppUser {
     this.avatarLink = avatarLink;
   }
 
-  public GeoLocation getGeolocation() {
-    return geolocation;
+  public Point getLocation() {
+    return location;
   }
 
-  public void setGeolocation(GeoLocation geolocation) {
-    this.geolocation = geolocation;
+  public void setLocation(Point point) {
+    this.location = point;
+  }
+
+  public boolean isOnline() {
+    return isOnline;
+  }
+
+  public void setIsOnline(boolean isOnline) {
+    this.isOnline = isOnline;
   }
 
 }
