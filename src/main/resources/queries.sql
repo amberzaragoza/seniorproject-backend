@@ -34,7 +34,15 @@
 -- cos((a.latitude*pi()/180)) * cos((((:longitude)- a.longitude)*pi()/180))))*180/pi())*60*1.1515) <=50
 
 
-SELECT a.username FROM appuser a WHERE (((acos(sin(((0)*pi()/180)) * 
+SELECT a.username FROM AppUser a WHERE (((acos(sin(((0)*pi()/180)) * 
 sin((a.latitude*pi()/180))+cos(((0)*pi()/180)) * cos((a.latitude*pi()/180)) * 
 cos((((0)- a.longitude)*pi()/180))))*180/pi())*60*1.1515) <=50
 AND a.is_online=true
+
+
+	-- @Query("SELECT a FROM AppUser a WHERE (((acos(sin(((:latitude)*pi()/180)) * " +
+  --    "sin((a.latitude*pi()/180))+cos(((:latitude)*pi()/180)) * cos((a.latitude*pi()/180)) * " +
+	-- 	 "cos((((:longitude)- a.longitude)*pi()/180))))*180/pi())*60*1.1515) <=:radius AND a.isOnline=true")
+	-- 	 public List<AppUser> find(@Param("latitude") Double latitude, 
+	-- 														 @Param("longitude") Double longitude, 
+	-- 														 @Param("radius") Double radius);

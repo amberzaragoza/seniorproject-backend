@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,19 +29,19 @@ public class Business {
 	@Column(name = "id", length = 36)
 	private String id;
 
-	@Column(name = "name", length=30)
+	@Column(name = "name", length = 30)
 	private String name;
 
-	@Column(name = "street", length=50)
+	@Column(name = "street", length = 50)
 	private String street;
 
-	@Column(name = "state", length=2)
+	@Column(name = "state", length = 2)
 	private String state;
 
-	@Column(name = "city", length=50)
+	@Column(name = "city", length = 50)
 	private String city;
 
-	@Column(name = "zip", length=8)
+	@Column(name = "zip", length = 8)
 	private String zip;
 
 	@Column(name = "primaryPhone", length = 10)
@@ -51,11 +50,14 @@ public class Business {
 	@Column(name = "altPhone", length = 10)
 	private String altPhone;
 
-	@Column(name = "email", length=30)
+	@Column(name = "email", length = 30)
 	private String email;
 
-	@Column(name = "about", length=255)
+	@Column(name = "about", length = 255)
 	private String about;
+
+	@Column(name = "industry")
+	private String industry;
 
 	@OneToOne
 	@JoinColumn(name = "owner_id")
@@ -69,16 +71,15 @@ public class Business {
 	private Set<Rating> ratings;
 
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
-	@JoinColumn(name="business")
+	@JoinColumn(name = "business")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Set<Menu> menus;
 
-	public Business() {}
+	public Business() {
+	}
 
-  public Business(String id, String name, String street, 
-                  String state, String city, String zip, 
-                  String primaryPhone, String altPhone, String email, 
-                  String about) {
+	public Business(String id, String name, String street, String state, String city, String zip, String primaryPhone,
+			String altPhone, String email, String about) {
 
 		this.id = id;
 		this.name = name;
@@ -89,10 +90,10 @@ public class Business {
 		this.primaryPhone = primaryPhone;
 		this.altPhone = altPhone;
 		this.email = email;
-    this.about = about;
-    this.employees = new HashSet<>();
-    this.menus = new HashSet<>();
-    this.ratings = new HashSet<>();
+		this.about = about;
+		this.employees = new HashSet<>();
+		this.menus = new HashSet<>();
+		this.ratings = new HashSet<>();
 
 	}
 
@@ -208,12 +209,20 @@ public class Business {
 		this.menus = menus;
 	}
 
-	public void addMenu(Menu menu){
+	public void addMenu(Menu menu) {
 		this.menus.add(menu);
-  }
-  
-  public void addRating(Rating rating){
-    this.ratings.add(rating);
-  }
+	}
+
+	public void addRating(Rating rating) {
+		this.ratings.add(rating);
+	}
+
+	public String getIndustry() {
+		return industry;
+	}
+
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
 
 }

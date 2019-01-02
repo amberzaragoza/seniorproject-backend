@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.project.api.models.AppUser;
@@ -54,7 +55,7 @@ public class UserController {
 	public ResponseEntity<AppUser> updateLocation(@PathVariable String username, @PathVariable double latitude, 
 																								@PathVariable double longitude, @PathVariable boolean isOnline){
 		AppUser user = userRepository.findByUsername(username);
-		Point point = new GeometryFactory().createPoint(new Coordinate(35, -119));
+		Point point = new GeometryFactory().createPoint(new Coordinate(latitude, longitude));
 		user.setLocation(point);
 		user.setLatitude(latitude);
 		user.setLongitude(longitude);
@@ -65,9 +66,18 @@ public class UserController {
 
 	}
 
-	@GetMapping("/get/dist/lat/{latitude}/long/{longitude}")
-	public List<AppUser> findByDistance(@PathVariable Double latitude, @PathVariable Double longitude){
-		return userRepository.find(latitude, longitude);
+	@GetMapping("/get/dist/lat/{latitude}/long/{longitude}/radius/{radius}/ind/{industry}")
+	public ResponseEntity<List<AppUser>> findByDistance(@PathVariable Double latitude, @PathVariable Double longitude, 
+																	                    @PathVariable Double radius, @PathVariable String industry){
+		List<AppUser> queryResult = userRepository.find(latitude, longitude, radius);
+		List<AppUser> users = new ArrayList<>();
+		for(AppUser user : queryResult){
+			if(user.getBusiness().getIndustry().equals(industry)){
+				users.add(user);
+			}
+		}
+		HttpHeaders httpHeaders = new HttpHeaders();
+		return new ResponseEntity<>(users, httpHeaders, HttpStatus.OK);
 	}
 
 	@RequestMapping(method=RequestMethod.GET, value="/get/email/{email}")

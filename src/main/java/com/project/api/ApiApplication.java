@@ -36,16 +36,26 @@ public class ApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 
-		String[] newUser1 = { "jobstevens@gmail.com", "aaa", "Job", "Stevens",
-				"https://ninjawiththeorangetshirt.files.wordpress.com/2010/11/jobbbs.jpg", };
-		String[] business1 = { "Orange Computer Repair", "CA", "OrangePcRepair@gmail.com", "6615552365", "6615553248",
-				"7900 Pegasus Dr.", "Bakersfield", "93301" };
-		createUsersAndBusinesses(newUser1, business1);
+		String[][] users = { {"jobstevens@gmail.com", "aaa", "Job", "Stevens", "https://ninjawiththeorangetshirt.files.wordpress.com/2010/11/jobbbs.jpg", "35.350204", "-119.104669"},
+												 {"AZ@gmail.com", "password", "Amber", "Zaragoza", "https://vips.org/wp-content/uploads/2017/07/avatar-female.png", "0.0", "0.0"},
+												 {"tommychong@gmail.com", "aaa", "Tommy", "Chong", "hhttps://cdn.inquisitr.com/wp-content/uploads/2016/05/Tommy.jpg", "35.354055", "-119.092246"},
+												 {"billgates@gmail.com", "aaa", "Bill", "Gates", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Bill_Gates_June_2015.jpg/424px-Bill_Gates_June_2015.jpg", "35.355239", "-119.058780"}
+	
+		};
+		String[][] businesses = { {"Orange Computer Repair", "CA", "OrangePcRepair@gmail.com", "6615552365", "6615553248", "7900 Pegasus Dr.", "Bakersfield", "93301", "Technology"},
+															 null,
+															{"Chong Bongs", "CA", "chongbongs@gmail.com", "6615552365", "6615553248", "8156 Orange Dr.", "Bakersfield", "93302", "Cannabis"},
+															{"Microsoft Computer Repair", "CA", "microsoft@gmail.com", "6615552365", "6615553248", "8156 Mountain View Rd.", "Bakersfield", "93302", "Technology"},
+		};
 
-		String[] newUser2 = { "AZ@gmail.com", "password", "Amber", "Zaragoza",
-				"https://vips.org/wp-content/uploads/2017/07/avatar-female.png" };
-		createUsersAndBusinesses(newUser2, null);
+		createUsersFromArray(users, businesses);
 
+	}
+
+	public void createUsersFromArray(String[][] users, String[][] businesses){
+		for(int i = 0; i < users.length; i++){
+			createUsersAndBusinesses(users[i], businesses[i]);
+		}
 	}
 
 	public void createUsersAndBusinesses(String[] user, String[] businessInfo) {
@@ -59,29 +69,24 @@ public class ApiApplication implements CommandLineRunner {
 
 		Point point = new GeometryFactory().createPoint(new Coordinate(0.0, 0.0));
 		newUser.setLocation(point);
-		newUser.setLatitude(0.0);
-		newUser.setLongitude(0.0);
-		newUser.setIsOnline(false);
+		newUser.setLatitude(Double.valueOf(user[5]));
+		newUser.setLongitude(Double.valueOf(user[6]));
+		newUser.setIsOnline(true);
 
-		
-
-		
 		userRepository.save(newUser);
-
-
-		
 
 		if(businessInfo != null){
 			Business business = new Business();
-			business.setName("Bob's Mobile PC Repair");
-			business.setState("CA");
+			business.setName(businessInfo[0]);
+			business.setState(businessInfo[1]);
 			business.setOwner(newUser);
-			business.setEmail("JobsPcRepair@gmail.com");
-			business.setPrimaryPhone("6618645654");
-			business.setAltPhone("6615585324");
-			business.setStreet("7900 Pegasus Dr.");
-			business.setCity("Bakersfield");
-			business.setZip("93301");
+			business.setEmail(businessInfo[2]);
+			business.setPrimaryPhone(businessInfo[3]);
+			business.setAltPhone(businessInfo[4]);
+			business.setStreet(businessInfo[5]);
+			business.setCity(businessInfo[6]);
+			business.setZip(businessInfo[7]);
+			business.setIndustry(businessInfo[8]);
 			businessRepository.save(business);
 
 		}
