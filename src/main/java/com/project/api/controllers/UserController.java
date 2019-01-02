@@ -51,10 +51,10 @@ public class UserController {
     return userRepository.findById(id).get();
 	}
 	
-	@PatchMapping("/update/user/{username}/lat/{latitude}/long/{longitude}/online/{isOnline}")
-	public ResponseEntity<AppUser> updateLocation(@PathVariable String username, @PathVariable double latitude, 
+	@PatchMapping("/update/user/{id}/lat/{latitude}/long/{longitude}/online/{isOnline}")
+	public ResponseEntity<AppUser> updateLocation(@PathVariable String id, @PathVariable double latitude, 
 																								@PathVariable double longitude, @PathVariable boolean isOnline){
-		AppUser user = userRepository.findByUsername(username);
+		AppUser user = userRepository.findById(id).get();
 		Point point = new GeometryFactory().createPoint(new Coordinate(latitude, longitude));
 		user.setLocation(point);
 		user.setLatitude(latitude);

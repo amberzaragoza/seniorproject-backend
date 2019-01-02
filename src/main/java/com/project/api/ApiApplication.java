@@ -36,16 +36,18 @@ public class ApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 
-		String[][] users = { {"jobstevens@gmail.com", "aaa", "Job", "Stevens", "https://ninjawiththeorangetshirt.files.wordpress.com/2010/11/jobbbs.jpg", "35.350204", "-119.104669"},
-												 {"AZ@gmail.com", "password", "Amber", "Zaragoza", "https://vips.org/wp-content/uploads/2017/07/avatar-female.png", "0.0", "0.0"},
-												 {"tommychong@gmail.com", "aaa", "Tommy", "Chong", "hhttps://cdn.inquisitr.com/wp-content/uploads/2016/05/Tommy.jpg", "35.354055", "-119.092246"},
-												 {"billgates@gmail.com", "aaa", "Bill", "Gates", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Bill_Gates_June_2015.jpg/424px-Bill_Gates_June_2015.jpg", "35.355239", "-119.058780"}
+		String[][] users = { {"jobstevens@gmail.com", "aaa", "Job", "Stevens", "https://ninjawiththeorangetshirt.files.wordpress.com/2010/11/jobbbs.jpg", "35.350204", "-119.104669", "false"},
+												 {"AZ@gmail.com", "password", "Amber", "Zaragoza", "https://vips.org/wp-content/uploads/2017/07/avatar-female.png", "0.0", "0.0", "false"},
+												 {"tommychong@gmail.com", "aaa", "Tommy", "Chong", "hhttps://cdn.inquisitr.com/wp-content/uploads/2016/05/Tommy.jpg", "35.354055", "-119.092246", "true"},
+												 {"billgates@gmail.com", "aaa", "Bill", "Gates", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Bill_Gates_June_2015.jpg/424px-Bill_Gates_June_2015.jpg", "35.355239", "-119.058780", "true"},
+												 {"markfuckerberg@gmail.com", "aaa", "Mark", "Fuckerberg", "https://i2.wp.com/zorbtour.com/wp-content/uploads/2017/07/img_6712.jpg?fit=371%2C213&ssl=1", "35.372052", "-119.138482", "true"}
 	
 		};
 		String[][] businesses = { {"Orange Computer Repair", "CA", "OrangePcRepair@gmail.com", "6615552365", "6615553248", "7900 Pegasus Dr.", "Bakersfield", "93301", "Technology"},
-															 null,
+										          {"Amber's Business", "CA", "AZbusiness@gmail.com", "6615552365", "6615553248", "8156 Orange Dr.", "Bakersfield", "93302", "Technology"},
 															{"Chong Bongs", "CA", "chongbongs@gmail.com", "6615552365", "6615553248", "8156 Orange Dr.", "Bakersfield", "93302", "Cannabis"},
 															{"Microsoft Computer Repair", "CA", "microsoft@gmail.com", "6615552365", "6615553248", "8156 Mountain View Rd.", "Bakersfield", "93302", "Technology"},
+															{"Fuckerbergs Ripoff Repair", "CA", "ripoff@gmail.com", "6615552365", "6615553248", "8156 Zucks Rd.", "Bakersfield", "93302", "Technology"},
 		};
 
 		createUsersFromArray(users, businesses);
@@ -71,7 +73,7 @@ public class ApiApplication implements CommandLineRunner {
 		newUser.setLocation(point);
 		newUser.setLatitude(Double.valueOf(user[5]));
 		newUser.setLongitude(Double.valueOf(user[6]));
-		newUser.setIsOnline(true);
+		newUser.setIsOnline(Boolean.parseBoolean(user[7]));
 
 		userRepository.save(newUser);
 
