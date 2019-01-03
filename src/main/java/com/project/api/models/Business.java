@@ -222,7 +222,7 @@ public class Business {
 	}
 
 	public void setIndustry(String industry) {
-		this.industry = industry;
+		this.industry = industry.toLowerCase();
 	}
 
 }

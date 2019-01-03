@@ -9,9 +9,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.vividsolutions.jts.geom.Point;
+// import com.vividsolutions.jts.geom.Point;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -50,9 +50,9 @@ public class AppUser {
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
 
-  @Column(name = "location", columnDefinition = "geography(Point, 4326)")
-  @JsonIgnore
-  private Point location;
+  // @Column(name = "location", columnDefinition = "geography(Point, 4326)")
+  // @JsonIgnore
+  // private Point location;
 
   @Column(name = "latitude")
   private Double latitude;
@@ -151,13 +151,13 @@ public class AppUser {
     this.avatarLink = avatarLink;
   }
 
-  public Point getLocation() {
-    return location;
-  }
+  // public Point getLocation() {
+  //   return location;
+  // }
 
-  public void setLocation(Point point) {
-    this.location = point;
-  }
+  // public void setLocation(Point point) {
+  //   this.location = point;
+  // }
 
   public boolean isOnline() {
     return isOnline;

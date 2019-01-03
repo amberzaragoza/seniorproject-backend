@@ -19,9 +19,9 @@ import java.util.List;
 
 import com.project.api.models.AppUser;
 import com.project.api.repositories.UserRepository;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
+// import com.vividsolutions.jts.geom.Coordinate;
+// import com.vividsolutions.jts.geom.GeometryFactory;
+// import com.vividsolutions.jts.geom.Point;
 
 @RestController
 @RequestMapping("/users")
@@ -41,8 +41,8 @@ public class UserController {
 	@PostMapping("/sign-up")
 	public void signup(@RequestBody AppUser user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		Point point = new GeometryFactory().createPoint(new Coordinate(35, -119));
-		user.setLocation(point);
+		// Point point = new GeometryFactory().createPoint(new Coordinate(35, -119));
+		// user.setLocation(point);
 		userRepository.save(user);
   }
   
@@ -55,8 +55,8 @@ public class UserController {
 	public ResponseEntity<AppUser> updateLocation(@PathVariable String id, @PathVariable double latitude, 
 																								@PathVariable double longitude, @PathVariable boolean isOnline){
 		AppUser user = userRepository.findById(id).get();
-		Point point = new GeometryFactory().createPoint(new Coordinate(latitude, longitude));
-		user.setLocation(point);
+		// Point point = new GeometryFactory().createPoint(new Coordinate(latitude, longitude));
+		// user.setLocation(point);
 		user.setLatitude(latitude);
 		user.setLongitude(longitude);
 		user.setIsOnline(isOnline);
