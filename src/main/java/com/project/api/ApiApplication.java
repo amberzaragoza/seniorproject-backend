@@ -49,9 +49,8 @@ public class ApiApplication implements CommandLineRunner {
 															{"Chong Bongs", "CA", "chongbongs@gmail.com", "6615552365", "6615553248", "8156 Orange Dr.", "Bakersfield", "93302", "Cannabis"},
 															{"Microsoft Computer Repair", "CA", "microsoft@gmail.com", "6615552365", "6615553248", "4266 Mountain View Rd.", "Bakersfield", "93302", "computer"},
 															{"Fuckerbergs Ripoff Repair", "CA", "ripoff@gmail.com", "6615552365", "6615553248", "8156 Zucks Rd.", "Bakersfield", "93302", "computer"},
-															{"Mr. Niceguy", "CA", "herbaldelivery@gmail.com", "6615552365", "6615553248", "6513 Sky Dr.", "Bakersfield", "93302", "Cannabis"},
+															{"Mr. Niceguy", "CA", "herbaldelivery@gmail.com", "6615552365", "6615553248", "6513 Sky Dr.", "Bakersfield", "93302", "cannabis"},
 
-															
 		};
 
 		createUsersFromArray(users, businesses);
