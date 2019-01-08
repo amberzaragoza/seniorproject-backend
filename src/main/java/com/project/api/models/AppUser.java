@@ -25,7 +25,7 @@ public class AppUser {
   @Column(name = "id", length = 36)
   private String id;
 
-  @Column(name = "username", length = 30)
+  @Column(name = "username", length = 50)
   private String username;
 
   @Column(name = "lastName", length = 20)

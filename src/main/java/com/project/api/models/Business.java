@@ -29,7 +29,7 @@ public class Business {
 	@Column(name = "id", length = 36)
 	private String id;
 
-	@Column(name = "name", length = 30)
+	@Column(name = "name", length = 50)
 	private String name;
 
 	@Column(name = "street", length = 50)
@@ -50,7 +50,7 @@ public class Business {
 	@Column(name = "altPhone", length = 10)
 	private String altPhone;
 
-	@Column(name = "email", length = 30)
+	@Column(name = "email", length = 60)
 	private String email;
 
 	@Column(name = "about", length = 255)
