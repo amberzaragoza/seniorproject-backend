@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.project.api.models.AppUser;
+import com.project.api.models.Business;
+import com.project.api.repositories.BusinessRepository;
 import com.project.api.repositories.UserRepository;
 // import com.vividsolutions.jts.geom.Coordinate;
 // import com.vividsolutions.jts.geom.GeometryFactory;
@@ -30,12 +33,16 @@ public class UserController {
   @Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
+  @Autowired
+  private BusinessRepository businessRepository;
 	
 	public UserController(UserRepository userRepository,
-			BCryptPasswordEncoder bCryptPasswordEncoder) {
+                        BCryptPasswordEncoder bCryptPasswordEncoder,
+                        BusinessRepository businessRepository) {
 		this.userRepository = userRepository;
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    this.businessRepository = businessRepository;
 	}
 	
 	@PostMapping("/sign-up")
@@ -64,7 +71,27 @@ public class UserController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		return new ResponseEntity<>(user, httpHeaders, HttpStatus.OK);
 
-	}
+  }
+  
+  @PatchMapping("/favorite/{username}/{businessId}")
+  public ResponseEntity<Business> addToFavorites(@PathVariable String username, 
+                                                 @PathVariable String businessId){
+    AppUser user = userRepository.findByUsername(username);
+    Business business = businessRepository.findById(businessId).get();
+    Set<Business> favorites = user.getFavorites();
+    favorites.add(business);
+    user.setFavorites(favorites);
+    userRepository.save(user);
+    HttpHeaders httpHeaders = new HttpHeaders();
+    return new ResponseEntity<>(business, httpHeaders, HttpStatus.OK);
+  }
+
+  @GetMapping("/favorites/{username}")
+  public ResponseEntity<Set<Business>> getFavorites(@PathVariable String username){
+    AppUser user = userRepository.findByUsername(username);
+    HttpHeaders httpHeaders = new HttpHeaders();
+    return new ResponseEntity<>(user.getFavorites(), httpHeaders, HttpStatus.OK);
+  }
 
 	@GetMapping("/get/dist/lat/{latitude}/long/{longitude}/radius/{radius}/ind/{industry}")
 	public ResponseEntity<List<AppUser>> findByDistance(@PathVariable Double latitude, @PathVariable Double longitude, 
@@ -92,6 +119,8 @@ public class UserController {
 		AppUser user = userRepository.findByResetToken(resetToken);
 		user.setPassword("");
 		return user;
-	}
+  }
+  
+
 
 }

@@ -1,10 +1,13 @@
 package com.project.api.models;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -50,10 +53,6 @@ public class AppUser {
   @ManyToOne(cascade = CascadeType.MERGE)
   private Business employedBy;
 
-  // @Column(name = "location", columnDefinition = "geography(Point, 4326)")
-  // @JsonIgnore
-  // private Point location;
-
   @Column(name = "latitude")
   private Double latitude;
 
@@ -62,6 +61,9 @@ public class AppUser {
 
   @Column(name = "isOnline")
   private boolean isOnline;
+
+  @ManyToMany(cascade = CascadeType.MERGE)
+  private Set<Business> favorites;
 
   public AppUser() {
   }
@@ -151,14 +153,6 @@ public class AppUser {
     this.avatarLink = avatarLink;
   }
 
-  // public Point getLocation() {
-  //   return location;
-  // }
-
-  // public void setLocation(Point point) {
-  //   this.location = point;
-  // }
-
   public boolean isOnline() {
     return isOnline;
   }
@@ -185,6 +179,14 @@ public class AppUser {
 
   public boolean isIsOnline() {
     return isOnline;
+  }
+
+  public Set<Business> getFavorites() {
+    return favorites;
+  }
+
+  public void setFavorites(Set<Business> favorites) {
+    this.favorites = favorites;
   }
 
 }
