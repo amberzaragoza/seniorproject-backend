@@ -31,8 +31,8 @@ dependencies {
 	compile("io.jsonwebtoken:jjwt:0.7.0")
 	runtime('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-  testCompile group: 'org.assertj', name: 'assertj-core', version: '3.11.0'
-	compile group: 'org.hibernate', name: 'hibernate-spatial', version: '5.1.0.Final'
+  testCompile group: 'org.assertj', name: 'assertj-core', version: '3.12.1'
+	compile group: 'org.hibernate', name: 'hibernate-spatial', version: '5.4.1.Final'
   
   // Web Sockets & STOMP
   compile group: 'org.springframework', name: 'spring-websocket', version: '5.1.5.RELEASE'
