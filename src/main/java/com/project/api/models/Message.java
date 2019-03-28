@@ -2,21 +2,35 @@ package com.project.api.models;
 
 public class Message {
 
-  private String name;
+  private String from;
+  private String to;
+  private String text;
 
-  public Message() {
+  public Message() {}
+
+
+  public String getFrom() {
+    return from;
   }
 
-  public Message(String name) {
-    this.name = name;
+  public void setFrom(String from) {
+    this.from = from;
   }
 
-  public String getName() {
-    return name;
+  public String getTo() {
+    return to;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setTo(String to) {
+    this.to = to;
+  }
+
+  public String getText() {
+    return text;
+  }
+
+  public void setText(String text) {
+    this.text = text;
   }
 
 }
