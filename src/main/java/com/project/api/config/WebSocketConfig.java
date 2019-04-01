@@ -10,6 +10,7 @@ import static com.project.api.constants.Constants.SECURED_CHAT_ROOM;
 import static com.project.api.constants.Constants.SECURED_CHAT_SPECIFIC_USER;
 import static com.project.api.constants.Constants.SECURED_USER;
 import static com.project.api.constants.Constants.SECURITY_MVC_SOCKET;
+import static com.project.api.constants.Constants.SECURED_CHAT;
 
 
 @Configuration
@@ -19,6 +20,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
   @Override
   public void registerStompEndpoints(StompEndpointRegistry registry) { 
     registry.addEndpoint(SECURED_CHAT_ROOM).withSockJS();
+    registry.addEndpoint(SECURED_CHAT).withSockJS();
   }
 
   @Override
